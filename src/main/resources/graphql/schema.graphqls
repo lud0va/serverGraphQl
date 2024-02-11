@@ -1,0 +1,69 @@
+scalar Date
+scalar LocalDate
+scalar Double
+type Customer {
+    id: Int!
+    firstName: String
+    lastName: String
+    email: String
+    phone: String
+    dateOfBirth: String
+    ordersEntity: [Orders]
+}
+
+type RestaurantTables {
+    id: Int!
+    numberOfSeats: Int
+    ordersEntity: [Orders]
+}
+
+type OrderItems {
+    orderItemId: Int!
+    orderId: Int
+    name: String
+    price: Float
+    quantity: Int
+    order: Orders
+}
+
+type Orders {
+    orderId: Int!
+    orderDate: String
+    customer: Customer
+    orderItems: [OrderItems]
+    tables: [RestaurantTables]
+}
+
+type Mutation {
+    addCustomer(customer:CustomerInput):Customer
+    addOrderItem(item:OrderItemsInput):OrderItems
+
+}
+
+type Query{
+    getCustomers:[Customer]!
+    getOrderItemsByOrder:[OrderItems]!
+    getOrderItemsByItem:[OrderItems]!
+    getOrdersDeCust:[Orders]!
+    deleteOrder:[Boolean]!
+    getCustomer:[Customer]!
+}
+input CustomerInput{
+    id:Int
+    firstName:String
+    lastName:String
+    email:String
+    phone:String
+    dateOfBirth:LocalDate
+}
+input OrderInput{
+     orderId:Int
+}
+
+input OrderItemsInput{
+    orderItemId:Int
+    name:  String
+    price: Double
+    quantity: Int
+    order:OrderInput
+}

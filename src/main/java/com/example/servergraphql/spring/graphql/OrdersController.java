@@ -4,6 +4,7 @@ import com.example.servergraphql.data.model.Errors;
 import com.example.servergraphql.data.model.OrdersEntity;
 import com.example.servergraphql.domain.services.OrdersServices;
 import io.vavr.control.Either;
+import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
@@ -22,7 +23,7 @@ public class OrdersController {
         return serv.getOrdersDeCust(idCust);
     }
     @QueryMapping
-    public Boolean deleteOrder(int idOrder) {
+    public Boolean deleteOrder(@Argument int idOrder) {
         Either<Errors, Integer> result = serv.deleteOrder(idOrder);
         if (result.isRight()) {
             return true;

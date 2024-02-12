@@ -1,6 +1,5 @@
 package com.example.servergraphql.domain.model;
 
-import java.time.LocalDate;
 import java.util.List;
 
 public record Customers(
@@ -10,5 +9,5 @@ public record Customers(
          String email,
          String phone,
          String dateOfBirth,
-         List<Orders> ordersEntity){
+         List<Orders> orders){
 }

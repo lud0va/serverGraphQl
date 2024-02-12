@@ -1,5 +1,5 @@
-package com.example.servergraphql.common;
-/*
+package com.example.servergraphql.security;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,10 +44,7 @@ public class SecurityConfig {
 //                                .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
 //                                .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
                                 req
-                                        .requestMatchers("/verify").permitAll()
-                                        .requestMatchers(GET, WHITE_LIST_URL).permitAll()
                                         .requestMatchers(POST, WHITE_LIST_URL).permitAll()
-
 
                                         .anyRequest()
                                         .authenticated()
@@ -61,4 +58,4 @@ public class SecurityConfig {
     }
 
 
-}*/
+}

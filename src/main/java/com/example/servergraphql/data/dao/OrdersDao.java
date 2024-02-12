@@ -11,5 +11,5 @@ import java.util.Optional;
 @Repository
 public interface OrdersDao extends ListCrudRepository<OrdersEntity,Long> {
    Optional<List<OrdersEntity>> findAllByCustomersEntity(CustomersEntity customersEntity);
-
+   Optional<OrdersEntity> findByOrderId(int Long);
 }

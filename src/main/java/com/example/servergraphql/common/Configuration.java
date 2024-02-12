@@ -1,6 +1,9 @@
 package com.example.servergraphql.common;
 
 import lombok.Getter;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 import java.io.IOException;
@@ -27,9 +30,9 @@ public class Configuration {
     }
 
 
-   /* @Bean
+   @Bean
     public PasswordEncoder createPasswordEncoder() {
 
         return new BCryptPasswordEncoder();
-    }*/
+    }
 }

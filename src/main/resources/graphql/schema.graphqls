@@ -1,4 +1,3 @@
-
 scalar Date
 
 type Customer {
@@ -8,22 +7,33 @@ type Customer {
     email: String
     phone: String
     dateOfBirth: String
-    ordersEntity: [Orders]
+    orders: [Orders]
+}
+type Credentials{
+    id:Int
+    userName:String!
+    password:String!
+    rol:String!
 }
 
 type RestaurantTables {
     id: Int!
     numberOfSeats: Int
-    ordersEntity: [Orders]
+    orders: [Orders]
 }
 
 type OrderItems {
     orderItemId: Int!
-    orderId: Int
+
     name: String
     price: Float
     quantity: Int
     order: Orders
+}
+type Command{
+    id: Int
+    commandName: String
+    customerId: Int
 }
 
 type Orders {
@@ -35,18 +45,22 @@ type Orders {
 }
 
 type Mutation {
-    addCustomer(customer:CustomerInput):Customer
-    addOrderItem(item:OrderItemsInput):OrderItems
-
+    register(name:String,password:String):Credentials
+    addCustomer(input:CustomerInput):Customer
+    addOrderItem(input:OrderItemsInput):OrderItems
+    deleteOrder(idOrder:Int):Boolean!
 }
 
 type Query{
+    getCommandsByCustomer(idCust:Int):[Command]
+    getAllOrders:[Orders]!
+    getAllTablesByOrder(idorder:Int):[RestaurantTables]!
     getCustomers:[Customer]!
     getOrderItemsByOrder(id:Int):[OrderItems]!
-    getOrderItemsByItem(idItem:Int):[OrderItems]!
-    getOrdersDeCust(idCustomer:Int):[Orders]!
-    deleteOrder(idOrder:Int):Boolean!
-        getCustomer(id:Int):Customer!
+    getOrderItemsByItem(idItem:Int):OrderItems!
+    getOrdersDeCust(idCust:Int):[Orders]!
+    getOrder(id:Int):Orders!
+    getCustomer(id:Int):Customer!
 }
 input CustomerInput{
     id:Int
@@ -57,7 +71,7 @@ input CustomerInput{
     dateOfBirth:Date
 }
 input OrderInput{
-     orderId:Int
+    orderId:Int
 }
 
 input OrderItemsInput{

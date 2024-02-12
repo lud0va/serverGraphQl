@@ -32,7 +32,6 @@ public class CustomersEntity {
     private LocalDate dateOfBirth;
     @OneToMany(mappedBy = "customersEntity", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<OrdersEntity> orders;
-
     public CustomersEntity(String firstName, String lastName, String email, String phone, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;

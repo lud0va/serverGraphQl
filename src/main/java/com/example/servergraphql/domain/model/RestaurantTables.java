@@ -1,8 +1,16 @@
 package com.example.servergraphql.domain.model;
 
+import com.example.servergraphql.data.model.OrdersEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
-@Component
-public record RestaurantTables() {
+import java.util.List;
+
+
+public record RestaurantTables(
+        int id,
+        int numberOfSeats,
+        List<Orders> orders
+
+) {
 }

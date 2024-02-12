@@ -21,8 +21,8 @@ public class OrdersEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int orderId;
-    @Column(name = "order_date")
-    private LocalDateTime order_date;
+    @Column(name = "orderDate")
+    private LocalDateTime orderDate;
     @ManyToOne
     @JoinColumn(name ="customer_id" )
     private CustomersEntity customersEntity;
@@ -30,7 +30,7 @@ public class OrdersEntity {
     private List<OrderItemsEntity> orderItemEntities;
     @ManyToMany
     @JoinTable(
-            name = "table_orders_mapping",
+            name = "table_orders",
             joinColumns =  @JoinColumn(name="order_id"),
             inverseJoinColumns = @JoinColumn(name = "table_number_id")
     )

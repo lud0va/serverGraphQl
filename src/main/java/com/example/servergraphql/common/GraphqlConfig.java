@@ -16,6 +16,8 @@ public class GraphqlConfig {
             return wiringBuilder -> wiringBuilder
                     .scalar(ExtendedScalars.Date)
                     .scalar(ExtendedScalars.DateTime)
+                    .scalar(ExtendedScalars.LocalTime)
+                    .scalar(ExtendedScalars.Locale)
                     .scalar(ExtendedScalars.GraphQLBigDecimal);
 
         }

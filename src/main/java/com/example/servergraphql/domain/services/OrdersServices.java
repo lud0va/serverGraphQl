@@ -23,7 +23,7 @@ public class OrdersServices {
         return dao.findAll();
     }
     public List<OrdersEntity> getOrdersDeCust(int idcust){
-        return dao.findAllByCustomers(new CustomersEntity(idcust)).get();
+        return dao.findAllByCustomersEntity(new CustomersEntity(idcust)).get();
     }
 
     public Either<Errors,Integer> deleteOrder(int idOrder){

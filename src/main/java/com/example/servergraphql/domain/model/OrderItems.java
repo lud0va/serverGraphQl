@@ -10,5 +10,5 @@ public record OrderItems(int orderItemId,
                          int quantity,
 
 
-                         OrdersEntity order) {
+                         Orders order) {
 }

@@ -1,6 +1,6 @@
+
 scalar Date
-scalar LocalDate
-scalar Double
+
 type Customer {
     id: Int!
     firstName: String
@@ -42,11 +42,11 @@ type Mutation {
 
 type Query{
     getCustomers:[Customer]!
-    getOrderItemsByOrder:[OrderItems]!
-    getOrderItemsByItem:[OrderItems]!
-    getOrdersDeCust:[Orders]!
-    deleteOrder:[Boolean]!
-    getCustomer:[Customer]!
+    getOrderItemsByOrder(id:Int):[OrderItems]!
+    getOrderItemsByItem(idItem:Int):[OrderItems]!
+    getOrdersDeCust(idCustomer:Int):[Orders]!
+    deleteOrder(idOrder:Int):Boolean!
+        getCustomer(id:Int):Customer!
 }
 input CustomerInput{
     id:Int
@@ -54,7 +54,7 @@ input CustomerInput{
     lastName:String
     email:String
     phone:String
-    dateOfBirth:LocalDate
+    dateOfBirth:Date
 }
 input OrderInput{
      orderId:Int
@@ -63,7 +63,7 @@ input OrderInput{
 input OrderItemsInput{
     orderItemId:Int
     name:  String
-    price: Double
+    price: Float
     quantity: Int
     order:OrderInput
 }

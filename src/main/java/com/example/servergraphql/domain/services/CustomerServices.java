@@ -2,10 +2,12 @@ package com.example.servergraphql.domain.services;
 
 import com.example.servergraphql.data.dao.CustomersDao;
 import com.example.servergraphql.data.model.CustomersEntity;
+import com.example.servergraphql.domain.model.Customers;
 import com.example.servergraphql.domain.model.graphql.CustomerInput;
 import com.example.servergraphql.domain.model.mappers.CustomerMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -20,13 +22,23 @@ public class CustomerServices {
 
         this.dao = dao;
     }
-    public List<CustomersEntity> getAll(){
-        return dao.findAll();
+    public List<Customers> getAll(){
+        List<CustomersEntity> c= dao.findAll();
+        List<Customers>s=new ArrayList<>();
+        for (CustomersEntity e:c){
+            s.add(mapper.toCustomer(e));
+        }
+
+        return s;
     }
 
-    public CustomersEntity getById(int id){return dao.findById(Long.valueOf(id)).get();}
-    public CustomersEntity saveCustomer(CustomerInput customer){
+    public Customers getById(int id){
+        CustomersEntity c=dao.findById(id).get();
+        return mapper.toCustomer(c);}
+    public Customers saveCustomer(CustomerInput customer){
         CustomersEntity cust=mapper.toCustomerEntity(customer);
-        return dao.save(cust);
+       CustomersEntity c= dao.save(cust);
+
+        return mapper.toCustomer(c);
     }
 }

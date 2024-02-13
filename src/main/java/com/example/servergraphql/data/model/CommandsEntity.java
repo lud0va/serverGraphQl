@@ -1,5 +1,6 @@
 package com.example.servergraphql.data.model;
 
+import com.example.servergraphql.common.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,14 +12,14 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "commands")
+@Table(name = Constantes.COMMANDS)
 public class CommandsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "commandId", nullable = false)
+    @Column(name = Constantes.COMMAND_ID, nullable = false)
     private int id;
-    @Column(name = "commandName")
+    @Column(name = Constantes.COMMAND_NAME)
     private String commandName;
-    @JoinColumn(name ="customerId" )
+    @JoinColumn(name = Constantes.CUSTOMER_ID)
     private int customerId;
 }

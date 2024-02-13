@@ -1,4 +1,4 @@
-package com.example.servergraphql.security;
+package com.example.servergraphql.spring.security;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -44,8 +44,9 @@ public class SecurityConfig {
 //                                .requestMatchers(PUT, "/api/v1/management/**").hasAnyAuthority(ADMIN_UPDATE.name(), MANAGER_UPDATE.name())
 //                                .requestMatchers(DELETE, "/api/v1/management/**").hasAnyAuthority(ADMIN_DELETE.name(), MANAGER_DELETE.name())
                                 req
-
-
+                                        .requestMatchers(POST,WHITE_LIST_URL).permitAll()
+                                        .requestMatchers("/swagger-ui-custom.html").permitAll()
+                                        .requestMatchers("/swagger-ui/index.html").permitAll()
                                         .anyRequest()
                                         .authenticated()
                 )

@@ -21,9 +21,9 @@ public class Configuration {
         try {
             Properties p = new Properties();
             p.loadFromXML(Configuration.class.getClassLoader().getResourceAsStream("config/claveKeystore.xml"));
-            this.clave = p.getProperty("clave");
-            this.nombreKeystore=p.getProperty("keystoreName");
-            this.serverName=p.getProperty("serverName");
+            this.clave = p.getProperty(Constantes.CLAVEKEYSTORE);
+            this.nombreKeystore=p.getProperty(Constantes.KEYSTORE_NAME);
+            this.serverName=p.getProperty(Constantes.SERVER_NAME);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }

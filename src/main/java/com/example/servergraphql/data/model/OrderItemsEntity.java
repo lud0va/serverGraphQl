@@ -1,5 +1,6 @@
 package com.example.servergraphql.data.model;
 
+import com.example.servergraphql.common.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,25 +12,22 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "order_items")
+@Table(name = Constantes.ORDERITEMS)
 public class OrderItemsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "order_item_id", nullable = false)
+    @Column(name = Constantes.ORDERITEMID, nullable = false)
     private int orderItemId;
 
-   @Column(name = "name")
+   @Column(name = Constantes.NAME)
     private String name;
-   @Column(name = "price")
+   @Column(name = Constantes.PRICE)
     private double price;
-   @Column(name = "quantity")
+   @Column(name = Constantes.QUANTITY)
     private int quantity;
 
     @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = Constantes.ORDER_ID)
     private OrdersEntity order;
 
-    public OrderItemsEntity(int orderItemId) {
-        this.orderItemId = orderItemId;
-    }
 }

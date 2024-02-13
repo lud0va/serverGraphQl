@@ -1,5 +1,6 @@
 package com.example.servergraphql.data.model;
 
+import com.example.servergraphql.common.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,22 +13,18 @@ import lombok.Setter;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "credentials")
+@Table(name = Constantes.CREDENTIALS)
 public class Credentials {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "_id", nullable = false)
+    @Column(name = Constantes.IDCREDENTIALS, nullable = false)
     private int id;
-    @Column(name = "user_name")
+    @Column(name = Constantes.USERNAME)
     private String userName;
-    @Column(name = "password")
+    @Column(name = Constantes.PASSWORD)
     private String password;
-    @Column(name = "rol")
+    @Column(name = Constantes.ROL)
     private String rol;
 
-    public Credentials(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
-        this.rol="user";
-    }
+
 }

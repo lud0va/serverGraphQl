@@ -1,5 +1,6 @@
 package com.example.servergraphql.data.model;
 
+import com.example.servergraphql.common.Constantes;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,24 +16,24 @@ import java.util.Set;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "orders")
+@Table(name = Constantes.ORDERS)
 public class OrdersEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
+    @Column(name = Constantes.ID, nullable = false)
     private int orderId;
-    @Column(name = "orderDate")
+    @Column(name = Constantes.ORDERDATE)
     private LocalDateTime orderDate;
     @ManyToOne
-    @JoinColumn(name ="customer_id" )
+    @JoinColumn(name = Constantes.CUSTOMERID)
     private CustomersEntity customersEntity;
-    @OneToMany(mappedBy = "order", cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    @OneToMany(mappedBy = Constantes.ORDER, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<OrderItemsEntity> orderItemEntities;
     @ManyToMany
     @JoinTable(
-            name = "table_orders",
-            joinColumns =  @JoinColumn(name="order_id"),
-            inverseJoinColumns = @JoinColumn(name = "table_number_id")
+            name = Constantes.TABLE_ORDERS,
+            joinColumns =  @JoinColumn(name= Constantes.ORDER_ID),
+            inverseJoinColumns = @JoinColumn(name = Constantes.TABLENUMBERID)
     )
     private Set<RestaurantTablesEntity> tables;
 

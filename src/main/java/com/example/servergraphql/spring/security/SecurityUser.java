@@ -1,4 +1,4 @@
-package com.example.servergraphql.security;
+package com.example.servergraphql.spring.security;
 
 import lombok.Builder;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,5 @@
 package com.example.servergraphql.domain.model;
 
-import com.example.servergraphql.data.model.OrdersEntity;
 
 public record OrderItems(int orderItemId,
 

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CommandsServices {
@@ -19,11 +20,16 @@ public class CommandsServices {
     }
 
     public List<Command> getCommandsByCustomer(int idcustomer){
-        List<CommandsEntity> entity=dao.findAllByCustomerId(idcustomer).get();
         List<Command> commands=new ArrayList<>();
-        for (CommandsEntity c:entity){
-            commands.add(mapper.toCommand(c));
+        Optional<List<CommandsEntity>> result=dao.findAllByCustomerId(idcustomer);
+        if (result.isPresent()) {
+            List<CommandsEntity> entity=result.get();
+
+            for (CommandsEntity c:entity){
+                commands.add(mapper.toCommand(c));
+            }
         }
+
         return commands;
     }
 }

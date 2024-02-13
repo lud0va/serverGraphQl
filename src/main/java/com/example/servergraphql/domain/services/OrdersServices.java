@@ -2,7 +2,7 @@ package com.example.servergraphql.domain.services;
 
 import com.example.servergraphql.data.dao.OrdersDao;
 import com.example.servergraphql.data.model.CustomersEntity;
-import com.example.servergraphql.data.model.Errors;
+import com.example.servergraphql.spring.Errors.Errors;
 import com.example.servergraphql.data.model.OrdersEntity;
 import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.model.mappers.OrdersMapper;

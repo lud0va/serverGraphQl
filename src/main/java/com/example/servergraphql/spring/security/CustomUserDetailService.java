@@ -1,4 +1,4 @@
-package com.example.servergraphql.security;
+package com.example.servergraphql.spring.security;
 
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;

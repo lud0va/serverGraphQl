@@ -1,7 +1,6 @@
 package com.example.servergraphql.spring.graphql;
 
-import com.example.servergraphql.data.model.Errors;
-import com.example.servergraphql.data.model.OrdersEntity;
+import com.example.servergraphql.spring.Errors.Errors;
 import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.services.OrdersServices;
 import io.vavr.control.Either;

@@ -1,4 +1,40 @@
 package com.example.servergraphql.common;
 
 public class Constantes {
+    public static final String CLAVEKEYSTORE = "clave";
+    public static final String KEYSTORE_NAME = "keystoreName";
+    public static final String SERVER_NAME = "serverName";
+    public static final String COMMANDS = "commands";
+    public static final String COMMAND_ID = "commandId";
+    public static final String COMMAND_NAME = "commandName";
+    public static final String CUSTOMER_ID = "customerId";
+    public static final String CREDENTIALS = "credentials";
+    public static final String IDCREDENTIALS = "_id";
+    public static final String USERNAME = "user_name";
+    public static final String PASSWORD = "password";
+    public static final String ROL = "rol";
+    public static final String CUSTOMERS = "customers";
+    public static final String ID = "id";
+    public static final String FIRSTNAME = "first_name";
+    public static final String LASTNAME = "last_name";
+    public static final String EMAIL = "email";
+    public static final String PHONE = "phone";
+    public static final String DATEOFBIRTH = "date_of_birth";
+    public static final String CUSTOMERS_ENTITY = "customersEntity";
+    public static final String ORDERITEMS = "order_items";
+    public static final String ORDERITEMID = "order_item_id";
+    public static final String NAME = "name";
+    public static final String PRICE = "price";
+    public static final String QUANTITY = "quantity";
+    public static final String ORDER_ID = "order_id";
+    public static final String ORDERS = "orders";
+    public static final String ORDERDATE = "orderDate";
+    public static final String CUSTOMERID = "customer_id";
+    public static final String ORDER = "order";
+    public static final String TABLE_ORDERS = "table_orders";
+    public static final String TABLENUMBERID = "table_number_id";
+    public static final String RESTAURANTTABLES = "restaurant_tables";
+    public static final String NUMBEROFSEATS = "number_of_seats";
+    public static final String TABLES = "tables";
+    public static final String SELECT_RT_FROM_RESTAURANT_TABLES_ENTITY_RT_JOIN_RT_ORDERS_O_WHERE_O_ORDER_ID_ID = "SELECT rt FROM RestaurantTablesEntity rt JOIN rt.orders o WHERE o.orderId = :id";
 }

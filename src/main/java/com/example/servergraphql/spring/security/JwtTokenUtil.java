@@ -1,17 +1,13 @@
-package com.example.servergraphql.spring.util;
+package com.example.servergraphql.spring.security;
 
 import com.example.servergraphql.common.Configuration;
-import com.example.servergraphql.data.model.Errors;
-import com.example.servergraphql.security.VerifyTokens;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
-import io.vavr.control.Either;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.security.KeyStore;
 import java.security.KeyStoreException;
@@ -42,12 +38,8 @@ public class JwtTokenUtil {
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (CertificateException | KeyStoreException | IOException |
-                 NoSuchAlgorithmException e) {
-            Logger.getLogger(VerifyTokens.class.getName()).log(Level.SEVERE, null, e);
-            return false;
-        }catch ( JwtException e){
-            Logger.getLogger(VerifyTokens.class.getName()).log(Level.SEVERE, null, e);
+        } catch (CertificateException | KeyStoreException | IOException | NoSuchAlgorithmException | JwtException e) {
+            Logger.getLogger(JwtTokenUtil.class.getName()).log(Level.SEVERE, null, e);
             return false;
         }
 
@@ -77,15 +69,10 @@ public class JwtTokenUtil {
            KeyStore keyStore = KeyStore.getInstance("PKCS12");
            keyStore.load(new FileInputStream(co.getNombreKeystore()), co.getClave().toCharArray());
            X509Certificate cert = (X509Certificate) keyStore.getCertificate(co.getServerName());
-           PublicKey publicKey = cert.getPublicKey();
 
-           return publicKey;
-       }  catch (CertificateException | KeyStoreException | IOException |
-                 NoSuchAlgorithmException e) {
-           Logger.getLogger(VerifyTokens.class.getName()).log(Level.SEVERE, "error al coger la clave", e);
-           return null;
-       }catch ( JwtException e){
-           Logger.getLogger(VerifyTokens.class.getName()).log(Level.SEVERE, "error al coger la clave", e);
+           return cert.getPublicKey();
+       }  catch (CertificateException | KeyStoreException | IOException | NoSuchAlgorithmException | JwtException e) {
+           Logger.getLogger(JwtTokenUtil.class.getName()).log(Level.SEVERE, "error al coger la clave", e);
            return null;
        }
    }

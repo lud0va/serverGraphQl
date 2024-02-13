@@ -1,7 +1,6 @@
 package com.example.servergraphql.domain.services;
 
 import com.example.servergraphql.data.dao.RestaurantTablesDao;
-import com.example.servergraphql.data.model.OrdersEntity;
 import com.example.servergraphql.data.model.RestaurantTablesEntity;
 import com.example.servergraphql.domain.model.RestaurantTables;
 import com.example.servergraphql.domain.model.mappers.RestaurantTablesMapper;

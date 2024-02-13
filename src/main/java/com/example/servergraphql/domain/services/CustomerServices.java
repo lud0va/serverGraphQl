@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class CustomerServices {
@@ -32,9 +33,17 @@ public class CustomerServices {
         return s;
     }
 
-    public Customers getById(int id){
-        CustomersEntity c=dao.findById(id).get();
-        return mapper.toCustomer(c);}
+    public Customers getById(int id) {
+        CustomersEntity c = null;
+        Optional<CustomersEntity> result = dao.findById(id);
+        if (result.isPresent()) {
+            c = result.get();
+
+        }
+        return mapper.toCustomer(c);
+    }
+
+
     public Customers saveCustomer(CustomerInput customer){
         CustomersEntity cust=mapper.toCustomerEntity(customer);
        CustomersEntity c= dao.save(cust);

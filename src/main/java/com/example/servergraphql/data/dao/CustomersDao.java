@@ -10,5 +10,5 @@ import java.util.Optional;
 public interface CustomersDao extends ListCrudRepository<CustomersEntity,Long> {
 
 
-    Optional<CustomersEntity> findById(int Long);
+    Optional<CustomersEntity> findById(int id);
 }

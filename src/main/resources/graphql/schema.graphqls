@@ -9,12 +9,7 @@ type Customer {
     dateOfBirth: String
     orders: [Orders]
 }
-type Credentials{
-    id:Int
-    userName:String!
-    password:String!
-    rol:String!
-}
+
 
 type RestaurantTables {
     id: Int!
@@ -45,7 +40,6 @@ type Orders {
 }
 
 type Mutation {
-    register(name:String,password:String):Credentials
     addCustomer(input:CustomerInput):Customer
     addOrderItem(input:OrderItemsInput):OrderItems
     deleteOrder(idOrder:Int):Boolean!

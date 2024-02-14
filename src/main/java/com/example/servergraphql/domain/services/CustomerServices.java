@@ -5,6 +5,8 @@ import com.example.servergraphql.data.model.CustomersEntity;
 import com.example.servergraphql.domain.model.Customers;
 import com.example.servergraphql.domain.model.graphql.CustomerInput;
 import com.example.servergraphql.domain.model.mappers.CustomerMapper;
+import com.example.servergraphql.spring.Errors.NotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -14,7 +16,7 @@ import java.util.Optional;
 @Service
 public class CustomerServices {
 
-    private  final CustomerMapper mapper;
+    private final CustomerMapper mapper;
     private final CustomersDao dao;
 
 
@@ -23,10 +25,11 @@ public class CustomerServices {
 
         this.dao = dao;
     }
-    public List<Customers> getAll(){
-        List<CustomersEntity> c= dao.findAll();
-        List<Customers>s=new ArrayList<>();
-        for (CustomersEntity e:c){
+
+    public List<Customers> getAll() {
+        List<CustomersEntity> c = dao.findAll();
+        List<Customers> s = new ArrayList<>();
+        for (CustomersEntity e : c) {
             s.add(mapper.toCustomer(e));
         }
 
@@ -34,19 +37,27 @@ public class CustomerServices {
     }
 
     public Customers getById(int id) {
-        CustomersEntity c = null;
-        Optional<CustomersEntity> result = dao.findById(id);
-        if (result.isPresent()) {
-            c = result.get();
+        try {
+            CustomersEntity c = null;
+            Optional<CustomersEntity> result = dao.findById(id);
+            if (result.isPresent()) {
+                c = result.get();
 
+            }
+            return mapper.toCustomer(c);
+
+        }catch (EmptyResultDataAccessException s){
+            throw new NotFoundException("Customer no encontrado");
         }
-        return mapper.toCustomer(c);
+
+
+
     }
 
 
-    public Customers saveCustomer(CustomerInput customer){
-        CustomersEntity cust=mapper.toCustomerEntity(customer);
-       CustomersEntity c= dao.save(cust);
+    public Customers saveCustomer(CustomerInput customer) {
+        CustomersEntity cust = mapper.toCustomerEntity(customer);
+        CustomersEntity c = dao.save(cust);
 
         return mapper.toCustomer(c);
     }

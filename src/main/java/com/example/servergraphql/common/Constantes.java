@@ -36,5 +36,5 @@ public class Constantes {
     public static final String RESTAURANTTABLES = "restaurant_tables";
     public static final String NUMBEROFSEATS = "number_of_seats";
     public static final String TABLES = "tables";
-    public static final String SELECT_RT_FROM_RESTAURANT_TABLES_ENTITY_RT_JOIN_RT_ORDERS_O_WHERE_O_ORDER_ID_ID = "SELECT rt FROM RestaurantTablesEntity rt JOIN rt.orders o WHERE o.orderId = :id";
+    public static final String SELECT_RT_FROM_RESTAURANT_TABLES_ENTITY_RT_JOIN_RT_ORDERS_O_WHERE_O_ORDER_ID_ID = "SELECT rt FROM RestaurantTablesEntity rt JOIN rt.customer o WHERE o.customer_id = :id";
 }

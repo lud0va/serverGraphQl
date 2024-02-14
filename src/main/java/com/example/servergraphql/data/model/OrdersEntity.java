@@ -29,13 +29,7 @@ public class OrdersEntity {
     private CustomersEntity customersEntity;
     @OneToMany(mappedBy = Constantes.ORDER, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<OrderItemsEntity> orderItemEntities;
-    @ManyToMany
-    @JoinTable(
-            name = Constantes.TABLE_ORDERS,
-            joinColumns =  @JoinColumn(name= Constantes.ORDER_ID),
-            inverseJoinColumns = @JoinColumn(name = Constantes.TABLENUMBERID)
-    )
-    private Set<RestaurantTablesEntity> tables;
+
 
     public OrdersEntity(int orderId) {
         this.orderId = orderId;

@@ -9,6 +9,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -33,6 +34,13 @@ public class CustomersEntity {
     private LocalDate dateOfBirth;
     @OneToMany(mappedBy = Constantes.CUSTOMERS_ENTITY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<OrdersEntity> orders;
+    @ManyToMany
+    @JoinTable(
+            name = Constantes.TABLE_ORDERS,
+            joinColumns =  @JoinColumn(name= Constantes.ORDER_ID),
+            inverseJoinColumns = @JoinColumn(name = Constantes.TABLENUMBERID)
+    )
+    private Set<RestaurantTablesEntity> tables;
     public CustomersEntity(String firstName, String lastName, String email, String phone, LocalDate dateOfBirth) {
         this.firstName = firstName;
         this.lastName = lastName;

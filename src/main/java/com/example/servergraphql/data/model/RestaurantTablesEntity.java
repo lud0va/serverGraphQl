@@ -23,5 +23,5 @@ public class RestaurantTablesEntity {
     @Column(name = Constantes.NUMBEROFSEATS)
     private int numberOfSeats;
     @ManyToMany(mappedBy = Constantes.TABLES)
-    private List<OrdersEntity> orders;
+    private List<CustomersEntity> customer;
 }

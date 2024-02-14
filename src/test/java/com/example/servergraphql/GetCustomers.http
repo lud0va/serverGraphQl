@@ -1,14 +1,29 @@
-GET http://localhost:8080/
-
+GET http://localhost:8080/login?username=hola&password=hola
 
 > {%
- client.global.set("token",response.body.)
-
- %}
+    client.global.set("token", response.body.access_token)
+%}
+###
+GET http://localhost:8080/register?username=hola2&password=hola2
+###
+GET http://localhost:8080/getAccessToken
+    ?refreshtoken=
 
 ###
-
 GRAPHQL http://localhost:8081/graphql
 Authorization: Bearer {{token}}
+Content-Type: application/json
+
+query getCustomers
+{
+firstname
+}
+
+
+
+
+
+
+
 
 

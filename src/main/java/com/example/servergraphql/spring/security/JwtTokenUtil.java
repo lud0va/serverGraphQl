@@ -1,10 +1,7 @@
 package com.example.servergraphql.spring.security;
 
 import com.example.servergraphql.common.Configuration;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.JwtException;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
 import java.io.FileInputStream;
@@ -27,7 +24,7 @@ public class JwtTokenUtil {
         this.co = co;
     }
 
-    public boolean validate(String token){
+    public boolean validate(String token) throws ExpiredJwtException {
         try{
             KeyStore keyStore = KeyStore.getInstance("PKCS12");
             keyStore.load(new FileInputStream(co.getNombreKeystore()), co.getClave().toCharArray());
@@ -38,8 +35,9 @@ public class JwtTokenUtil {
                     .build()
                     .parseClaimsJws(token);
             return true;
-        } catch (CertificateException | KeyStoreException | IOException | NoSuchAlgorithmException | JwtException e) {
+        } catch (CertificateException | KeyStoreException | IOException | NoSuchAlgorithmException e) {
             Logger.getLogger(JwtTokenUtil.class.getName()).log(Level.SEVERE, null, e);
+
             return false;
         }
 

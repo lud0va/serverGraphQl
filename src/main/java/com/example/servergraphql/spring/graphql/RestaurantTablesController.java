@@ -1,6 +1,5 @@
 package com.example.servergraphql.spring.graphql;
 
-import com.example.servergraphql.data.model.RestaurantTablesEntity;
 import com.example.servergraphql.domain.model.RestaurantTables;
 import com.example.servergraphql.domain.services.RestaurantTablesServices;
 import org.springframework.graphql.data.method.annotation.Argument;

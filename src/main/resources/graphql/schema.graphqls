@@ -8,13 +8,14 @@ type Customer {
     phone: String
     dateOfBirth: String
     orders: [Orders]
+    tables: [RestaurantTables]
 }
 
 
 type RestaurantTables {
     id: Int!
     numberOfSeats: Int
-    orders: [Orders]
+    orders: [Customer]
 }
 
 type OrderItems {
@@ -36,7 +37,7 @@ type Orders {
     orderDate: String
     customer: Customer
     orderItems: [OrderItems]
-    tables: [RestaurantTables]
+
 }
 
 type Mutation {

@@ -12,6 +12,6 @@ import java.util.List;
 @Repository
 public interface RestaurantTablesDao extends  ListCrudRepository<RestaurantTablesEntity,Long> {
 
-    @Query(Constantes.SELECT_RT_FROM_RESTAURANT_TABLES_ENTITY_RT_JOIN_RT_ORDERS_O_WHERE_O_ORDER_ID_ID)
+    @Query("SELECT rt FROM RestaurantTablesEntity rt JOIN rt.customer c where  c.id=:id")
     List<RestaurantTablesEntity> findAllByOrdersId(int id);
 }

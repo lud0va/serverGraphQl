@@ -21,7 +21,6 @@ public class OrdersController {
     }
 
     @QueryMapping
-
     public List<Orders> getAllOrders() {
         return serv.getAllOrders();
     }

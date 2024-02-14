@@ -9,17 +9,146 @@ GET http://localhost:8080/register?username=hola2&password=hola2
 GET http://localhost:8080/getAccessToken
     ?refreshtoken=
 
-###
-GRAPHQL http://localhost:8081/graphql
-Authorization: Bearer {{token}}
-Content-Type: application/json
+###OrderItems
+GRAPHQL http://localhos:8081/graphql
 
-query getCustomers
+mutation  addOrderItem($input: OrderItemsInput) {
+    addOrderItem(input: $input) {
+        name
+    }
+}
+
 {
-firstname
+  "input": ""
 }
 
 
+###
+GRAPHQL http://localhost:8081/graphql
+
+query  getOrderItemsByItem($idItem: Int) {
+    getOrderItemsByItem(idItem: $idItem) {
+        name
+    }
+}
+
+{
+  "idItem": ""
+}
+###
+GRAPHQL http://localhost:8081/graphql
+
+query  getOrderItemsByOrder($id: Int) {
+    getOrderItemsByOrder(id: $id) {
+        name
+    }
+}
+
+{
+  "id": ""
+}
+###Customers
+GRAPHQL http://localhost:8081/graphql
+
+query   {
+    getCustomers {
+        firstName
+    }
+}
+###
+GRAPHQL http://localhost:8081/graphql
+
+query  getCustomer($id: Int) {
+    getCustomer(id: $id) {
+        firstName
+    }
+}
+
+{
+  "id": ""
+}
+###
+GRAPHQL http://localhost:8081/graphql
+
+mutation  addCustomer($input: CustomerInput) {
+    addCustomer(input: $input) {
+        firstName
+    }
+}
+
+{
+  "input": ""
+}
+###Orders
+GRAPHQL http://localhost:8081/graphql
+
+query  {
+    getAllOrders {
+        orderId
+    }
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+
+query  getOrdersDeCust($idCust: Int) {
+    getOrdersDeCust(idCust: $idCust) {
+        orderId
+    }
+}
+
+{
+  "idCust": ""
+}
+###
+GRAPHQL http://localhost:8081/graphql
+
+mutation  deleteOrder($idOrder: Int) {
+    deleteOrder(idOrder: $idOrder) {
+        __typename
+    }
+}
+
+{
+  "idOrder": ""
+}
+###
+GRAPHQL http://localhost:8081/graphql
+
+query  getOrder($id: Int) {
+    getOrder(id: $id) {
+        orderId
+    }
+}
+
+{
+  "id": ""
+}
+
+###RestaurantTables
+GRAPHQL http://localhost:8081/graphql
+
+query getAllTablesByOrder($idorder:Int){
+    getAllTablesByOrder(idorder: $idorder)
+    {
+     numberOfSeats
+    }
+}
+{"idorder": 1
+}
+
+###Commands
+GRAPHQL http://localhost:8081/graphql
+
+query  getCommandsByCustomer($idCust: Int) {
+getCommandsByCustomer(idCust: $idCust) {
+commandName
+}
+}
+
+{
+   "idCust": ""
+}
 
 
 

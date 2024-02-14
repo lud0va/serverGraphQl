@@ -5,7 +5,7 @@ import com.example.servergraphql.data.model.CustomersEntity;
 import com.example.servergraphql.domain.model.Customers;
 import com.example.servergraphql.domain.model.graphql.CustomerInput;
 import com.example.servergraphql.domain.model.mappers.CustomerMapper;
-import com.example.servergraphql.spring.Errors.NotFoundException;
+import com.example.servergraphql.spring.Errors.NotFoundElementException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
@@ -47,7 +47,7 @@ public class CustomerServices {
             return mapper.toCustomer(c);
 
         }catch (EmptyResultDataAccessException s){
-            throw new NotFoundException("Customer no encontrado");
+            throw new NotFoundElementException("Customer not found");
         }
 
 

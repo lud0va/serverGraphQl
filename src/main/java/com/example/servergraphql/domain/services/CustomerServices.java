@@ -46,7 +46,7 @@ public class CustomerServices {
             }
             return mapper.toCustomer(c);
 
-        }catch (EmptyResultDataAccessException s){
+        }catch (Exception s){
             throw new NotFoundElementException("Customer not found");
         }
 

@@ -7,9 +7,12 @@ import com.example.servergraphql.domain.model.OrderItems;
 import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.model.graphql.OrderItemsInput;
 import com.example.servergraphql.domain.model.mappers.OrderItemsMapper;
+import com.example.servergraphql.spring.Errors.IdInvalidaException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,9 +37,15 @@ public class OrderItemsServices {
         return item;
     }
    public OrderItems saveOrderItem(OrderItemsInput items){
-        OrderItemsEntity it=mapper.toOrderItems(items);
-       OrderItems or=mapper.toOrderItem(dao.save(it));
-        return or;
+        try {
+            OrderItemsEntity it=mapper.toOrderItems(items);
+            it.setOrder(new OrdersEntity(items.orderId()));
+            OrderItems or=mapper.toOrderItem(dao.save(it));
+            return or;
+        }catch (DataIntegrityViolationException s){
+            throw new IdInvalidaException(s.getMessage());
+        }
+
    }
 
    public OrderItems getOrderItemById(int idOrderItem){return mapper.toOrderItem(dao.findByOrderItemId(idOrderItem).get());}

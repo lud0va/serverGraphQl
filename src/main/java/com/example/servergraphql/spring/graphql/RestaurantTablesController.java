@@ -19,7 +19,7 @@ public class RestaurantTablesController {
 
     @QueryMapping
     @PreAuthorize("hasRole('admin') OR hasRole('user')")
-    public List<RestaurantTables> getAllTablesByOrder(@Argument int idorder){
-        return restaurantTablesServices.getAllTablesByOrder(idorder);
+    public List<RestaurantTables> getAllTablesByCustomer(@Argument int idCust){
+        return restaurantTablesServices.getAllTablesByCustomer(idCust);
     }
 }

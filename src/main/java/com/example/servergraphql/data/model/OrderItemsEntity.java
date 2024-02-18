@@ -26,7 +26,7 @@ public class OrderItemsEntity {
    @Column(name = Constantes.QUANTITY)
     private int quantity;
 
-    @ManyToOne(cascade = {CascadeType.REMOVE,CascadeType.PERSIST})
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = Constantes.ORDER_ID)
     private OrdersEntity order;
 

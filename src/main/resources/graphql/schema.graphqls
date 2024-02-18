@@ -2,11 +2,11 @@ scalar Date
 
 type Customer {
     id: Int!
-    firstName: String
-    lastName: String
-    email: String
-    phone: String
-    dateOfBirth: String
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    dateOfBirth: String!
     orders: [Orders]
     tables: [RestaurantTables]
 }
@@ -41,19 +41,19 @@ type Orders {
 }
 
 type Mutation {
-    addCustomer(input:CustomerInput):Customer
-    addOrderItem(input:OrderItemsInput):OrderItems
+    addCustomer(input:CustomerInput):Customer!
+    addOrderItem(input:OrderItemsInput):OrderItems!
     deleteOrder(idOrder:Int):Boolean!
 }
 
 type Query{
     getCommandsByCustomer(idCust:Int):[Command]
-    getAllOrders:[Orders]!
-    getAllTablesByOrder(idorder:Int):[RestaurantTables]!
-    getCustomers:[Customer]!
-    getOrderItemsByOrder(id:Int):[OrderItems]!
+    getAllOrders:[Orders!]!
+    getAllTablesByCustomer(idCust:Int):[RestaurantTables]
+    getCustomers:[Customer!]!
+    getOrderItemsByOrder(id:Int):[OrderItems]
     getOrderItemsByItem(idItem:Int):OrderItems!
-    getOrdersDeCust(idCust:Int):[Orders]!
+    getOrdersDeCust(idCust:Int):[Orders]
     getOrder(id:Int):Orders!
     getCustomer(id:Int):Customer!
 }
@@ -74,5 +74,5 @@ input OrderItemsInput{
     name:  String
     price: Float
     quantity: Int
-    order:OrderInput
+    orderId:Int
 }

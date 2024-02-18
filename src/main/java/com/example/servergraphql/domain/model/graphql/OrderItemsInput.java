@@ -1,18 +1,16 @@
 package com.example.servergraphql.domain.model.graphql;
 
 
-
-
 public record OrderItemsInput(
-         int orderItemId,
+        int orderItemId,
 
 
-         String name,
-         double price,
-         int quantity,
+        String name,
+        double price,
+        int quantity,
 
 
-         OrderInput order
+        int orderId
 ) {
 
 

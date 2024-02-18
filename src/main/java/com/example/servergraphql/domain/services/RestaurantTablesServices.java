@@ -19,8 +19,8 @@ public class RestaurantTablesServices {
         this.mapper = mapper;
     }
 
-    public List<RestaurantTables> getAllTablesByOrder(int idorder){
-       List<RestaurantTablesEntity>  result=dao.findAllByOrdersId(idorder);
+    public List<RestaurantTables> getAllTablesByCustomer(int idCust){
+       List<RestaurantTablesEntity>  result=dao.findAllByCustomersId(idCust);
        List<RestaurantTables> tables=new ArrayList<>();
         for (RestaurantTablesEntity c:result){
             tables.add(mapper.toTables(c));

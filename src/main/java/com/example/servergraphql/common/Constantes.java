@@ -31,7 +31,7 @@ public class Constantes {
     public static final String ORDERDATE = "orderDate";
     public static final String CUSTOMERID = "customer_id";
     public static final String ORDER = "order";
-    public static final String TABLE_ORDERS = "table_orders";
+    public static final String TABLE_CUSTOMERS = "table_customers";
     public static final String TABLENUMBERID = "table_number_id";
     public static final String RESTAURANTTABLES = "restaurant_tables";
     public static final String NUMBEROFSEATS = "number_of_seats";

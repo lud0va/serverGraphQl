@@ -36,8 +36,8 @@ public class CustomersEntity {
     private List<OrdersEntity> orders;
     @ManyToMany
     @JoinTable(
-            name = Constantes.TABLE_ORDERS,
-            joinColumns =  @JoinColumn(name= Constantes.ORDER_ID),
+            name = Constantes.TABLE_CUSTOMERS,
+            joinColumns =  @JoinColumn(name= Constantes.CUSTOMERID),
             inverseJoinColumns = @JoinColumn(name = Constantes.TABLENUMBERID)
     )
     private Set<RestaurantTablesEntity> tables;

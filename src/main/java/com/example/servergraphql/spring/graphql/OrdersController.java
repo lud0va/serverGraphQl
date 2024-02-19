@@ -21,6 +21,7 @@ public class OrdersController {
     }
 
     @QueryMapping
+    @PreAuthorize("hasRole('admin') OR hasRole('user')")
     public List<Orders> getAllOrders() {
         return serv.getAllOrders();
     }

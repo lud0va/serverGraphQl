@@ -71,8 +71,10 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             chain.doFilter(request, response);
         } catch (ExpiredJwtException e) {
             Logger.getLogger(JwtTokenFilter.class.getName()).log(Level.SEVERE, e.getMessage());
-                        
+            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
             chain.doFilter(request, response);
+
+
             // Token expirado, enviar respuesta HTTP 401 no autorizada
 
         }

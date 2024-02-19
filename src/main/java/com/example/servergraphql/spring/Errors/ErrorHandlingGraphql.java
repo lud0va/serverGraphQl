@@ -13,7 +13,7 @@ public class ErrorHandlingGraphql extends DataFetcherExceptionResolverAdapter {
     public GraphQLError resolveToSingleError(Throwable ex, DataFetchingEnvironment env) {
         if (ex instanceof MyTokenExpired) {
             return GraphqlErrorBuilder.newError()
-                    .errorType(ErrorType.UNAUTHORIZED)
+                    .errorType(ErrorType.NOT_FOUND)
                     .message(ex.getMessage())
                     .path(env.getExecutionStepInfo().getPath())
                     .location(env.getField().getSourceLocation())

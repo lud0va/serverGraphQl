@@ -21,20 +21,35 @@ public class CustomerController {
         this.customerServices = customerServices;
     }
 
+    @MutationMapping
+    @PreAuthorize("hasRole('admin')")
+    public Customers updateCustomer(@Argument CustomerInput input) {
+     return customerServices.updateCustomer(input);
+    }
+
+    @MutationMapping
+    @PreAuthorize("hasRole('admin')")
+    public Boolean deleteCustomer(@Argument int idCustomer) {
+        customerServices.deleteCustomer(idCustomer);
+        return null;
+    }
     @QueryMapping
     @PreAuthorize("hasRole('admin') OR hasRole('user')")
     public List<Customers> getCustomers() {
         return customerServices.getAll();
     }
+
     @QueryMapping
     @PreAuthorize("hasRole('admin') OR hasRole('user')")
-    public Customers getCustomer(@Argument int id){
+    public Customers getCustomer(@Argument int id) {
         return customerServices.getById(id);
     }
+
     @MutationMapping
     @PreAuthorize("hasRole('admin')")
-    public Customers addCustomer(@Argument CustomerInput input){
-        return customerServices.saveCustomer(input);}
+    public Customers addCustomer(@Argument CustomerInput input) {
+        return customerServices.saveCustomer(input);
+    }
 
 
 }

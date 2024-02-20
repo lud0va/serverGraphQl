@@ -1,5 +1,6 @@
 package com.example.servergraphql.spring.graphql;
 
+import com.example.servergraphql.domain.model.graphql.OrderInput;
 import com.example.servergraphql.spring.Errors.Errors;
 import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.services.OrdersServices;
@@ -41,10 +42,13 @@ public class OrdersController {
     @MutationMapping
     @PreAuthorize("hasRole('admin')")
     public Boolean deleteOrder(@Argument int idOrder) {
-        Either<Errors, Integer> result = serv.deleteOrder(idOrder);
-        if (result.isRight()) {
-            return true;
-        }
-        return false;
+        serv.deleteOrder(idOrder);
+        return null;
+    }
+
+    @MutationMapping
+    @PreAuthorize("hasRole('admin')")
+    public Orders saveOrder(@Argument OrderInput input) {
+        return serv.saveOrder(input);
     }
 }

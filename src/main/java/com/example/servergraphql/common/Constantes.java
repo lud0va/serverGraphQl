@@ -5,9 +5,9 @@ public class Constantes {
     public static final String KEYSTORE_NAME = "keystoreName";
     public static final String SERVER_NAME = "serverName";
     public static final String COMMANDS = "commands";
-    public static final String COMMAND_ID = "commandId";
+    public static final String COMMANDID = "command_Id";
     public static final String COMMAND_NAME = "commandName";
-    public static final String CUSTOMER_ID = "customerId";
+    public static final String CUSTOMER_ID = "customer_id";
     public static final String CREDENTIALS = "credentials";
     public static final String IDCREDENTIALS = "_id";
     public static final String USERNAME = "user_name";

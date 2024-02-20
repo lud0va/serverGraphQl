@@ -4,17 +4,17 @@ import com.example.servergraphql.data.dao.OrderItemsDao;
 import com.example.servergraphql.data.model.OrderItemsEntity;
 import com.example.servergraphql.data.model.OrdersEntity;
 import com.example.servergraphql.domain.model.OrderItems;
-import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.model.graphql.OrderItemsInput;
 import com.example.servergraphql.domain.model.mappers.OrderItemsMapper;
-import com.example.servergraphql.spring.Errors.IdInvalidaException;
+import com.example.servergraphql.spring.Errors.exceptions.IdInvalidaException;
+import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 
@@ -28,6 +28,7 @@ public class OrderItemsServices {
         this.dao = dao;
     }
     public List<OrderItems> getOrderItemsByOrder(int idorder){
+        try {
         List<OrderItemsEntity> itemsEn=dao.findAllByOrder(new OrdersEntity(idorder)).get();
         List<OrderItems> item=new ArrayList<>();
         for (OrderItemsEntity i:itemsEn){
@@ -35,6 +36,9 @@ public class OrderItemsServices {
 
         }
         return item;
+        }catch (NoSuchElementException s){
+            throw new NotFoundElementException("OrderItem not found");
+        }
     }
    public OrderItems saveOrderItem(OrderItemsInput items){
         try {
@@ -43,10 +47,16 @@ public class OrderItemsServices {
             OrderItems or=mapper.toOrderItem(dao.save(it));
             return or;
         }catch (DataIntegrityViolationException s){
-            throw new IdInvalidaException(s.getMessage());
+            throw new IdInvalidaException();
         }
 
    }
 
-   public OrderItems getOrderItemById(int idOrderItem){return mapper.toOrderItem(dao.findByOrderItemId(idOrderItem).get());}
+   public OrderItems getOrderItemById(int idOrderItem) {
+       try {
+           return mapper.toOrderItem(dao.findByOrderItemId(idOrderItem).get());
+       } catch (NoSuchElementException s) {
+           throw new NotFoundElementException("OrderItem not found");
+       }
+   }
 }

@@ -1,5 +1,8 @@
 package com.example.servergraphql.spring.Errors;
 
+import com.example.servergraphql.spring.Errors.exceptions.IdInvalidaException;
+import com.example.servergraphql.spring.Errors.exceptions.MyTokenExpired;
+import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
 import graphql.schema.DataFetchingEnvironment;
@@ -18,9 +21,18 @@ public class ErrorHandlingGraphql extends DataFetcherExceptionResolverAdapter {
                     .path(env.getExecutionStepInfo().getPath())
                     .location(env.getField().getSourceLocation())
                     .build();
-        }else if (ex instanceof  IdInvalidaException) {
+        }else if (ex instanceof IdInvalidaException) {
             return GraphqlErrorBuilder.newError()
                     .errorType(ErrorType.BAD_REQUEST)
+                    .message(ex.getMessage())
+                    .path(env.getExecutionStepInfo().getPath())
+                    .location(env.getField().getSourceLocation())
+                    .build();
+
+
+        }else if (ex instanceof NotFoundElementException) {
+            return GraphqlErrorBuilder.newError()
+                    .errorType(ErrorType.NOT_FOUND)
                     .message(ex.getMessage())
                     .path(env.getExecutionStepInfo().getPath())
                     .location(env.getField().getSourceLocation())

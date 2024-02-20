@@ -33,6 +33,8 @@ public class CustomersEntity {
     @Column(name = Constantes.DATEOFBIRTH)
     private LocalDate dateOfBirth;
     @OneToMany(mappedBy = Constantes.CUSTOMERS_ENTITY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
+    private List<CommandsEntity> commandsEntities;
+    @OneToMany(mappedBy = Constantes.CUSTOMERS_ENTITY, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<OrdersEntity> orders;
     @ManyToMany
     @JoinTable(

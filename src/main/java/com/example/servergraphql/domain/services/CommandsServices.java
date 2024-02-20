@@ -4,10 +4,12 @@ import com.example.servergraphql.data.dao.CommandsDao;
 import com.example.servergraphql.data.model.CommandsEntity;
 import com.example.servergraphql.domain.model.Command;
 import com.example.servergraphql.domain.model.mappers.CommandsMapper;
+import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -20,8 +22,9 @@ public class CommandsServices {
     }
 
     public List<Command> getCommandsByCustomer(int idcustomer){
+        try {
         List<Command> commands=new ArrayList<>();
-        Optional<List<CommandsEntity>> result=dao.findAllByCustomerId(idcustomer);
+        Optional<List<CommandsEntity>> result=dao.findAllByCustomer(idcustomer);
         if (result.isPresent()) {
             List<CommandsEntity> entity=result.get();
 
@@ -31,5 +34,8 @@ public class CommandsServices {
         }
 
         return commands;
-    }
+        } catch (NoSuchElementException e) {
+            throw new NotFoundElementException("Command no encontrada");
+        }
+        }
 }

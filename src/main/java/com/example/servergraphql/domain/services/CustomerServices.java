@@ -5,12 +5,14 @@ import com.example.servergraphql.data.model.CustomersEntity;
 import com.example.servergraphql.domain.model.Customers;
 import com.example.servergraphql.domain.model.graphql.CustomerInput;
 import com.example.servergraphql.domain.model.mappers.CustomerMapper;
-import com.example.servergraphql.spring.Errors.NotFoundElementException;
-import org.springframework.dao.EmptyResultDataAccessException;
+import com.example.servergraphql.spring.Errors.exceptions.IdInvalidaException;
+import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Service
@@ -36,6 +38,24 @@ public class CustomerServices {
         return s;
     }
 
+    public Customers updateCustomer(CustomerInput customerInput){
+        try {
+            CustomersEntity cust = mapper.toCustomerEntity(customerInput);
+            CustomersEntity c = dao.save(cust);
+
+            return mapper.toCustomer(c);
+        }catch (DataIntegrityViolationException s){
+            throw new IdInvalidaException();
+        }
+
+    }
+
+    public void deleteCustomer(int idCustomer) {
+        CustomersEntity entity=dao.findById(idCustomer).get();
+        dao.delete(entity);
+
+    }
+
     public Customers getById(int id) {
         try {
             CustomersEntity c = null;
@@ -46,7 +66,7 @@ public class CustomerServices {
             }
             return mapper.toCustomer(c);
 
-        }catch (Exception s){
+        }catch (NoSuchElementException s){
             throw new NotFoundElementException("Customer not found");
         }
 
@@ -56,9 +76,14 @@ public class CustomerServices {
 
 
     public Customers saveCustomer(CustomerInput customer) {
-        CustomersEntity cust = mapper.toCustomerEntity(customer);
-        CustomersEntity c = dao.save(cust);
+        try {
+            CustomersEntity cust = mapper.toCustomerEntity(customer);
+            CustomersEntity c = dao.save(cust);
 
-        return mapper.toCustomer(c);
+            return mapper.toCustomer(c);
+        }catch (DataIntegrityViolationException s){
+            throw new IdInvalidaException();
+        }
+
     }
 }

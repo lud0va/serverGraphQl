@@ -16,10 +16,11 @@ import lombok.Setter;
 public class CommandsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = Constantes.COMMAND_ID, nullable = false)
+    @Column(name = Constantes.COMMANDID, nullable = false)
     private int id;
     @Column(name = Constantes.COMMAND_NAME)
     private String commandName;
+    @ManyToOne(cascade = {CascadeType.REMOVE})
     @JoinColumn(name = Constantes.CUSTOMER_ID)
-    private int customerId;
+    private CustomersEntity customersEntity;
 }

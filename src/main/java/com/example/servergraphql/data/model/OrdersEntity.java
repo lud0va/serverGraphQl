@@ -27,7 +27,7 @@ public class OrdersEntity {
     @ManyToOne
     @JoinColumn(name = Constantes.CUSTOMERID)
     private CustomersEntity customersEntity;
-    @OneToMany(mappedBy = Constantes.ORDER, cascade = {CascadeType.REMOVE})
+    @OneToMany(mappedBy = Constantes.ORDER, cascade = {CascadeType.REMOVE, CascadeType.PERSIST})
     private List<OrderItemsEntity> orderItemEntities;
 
 

@@ -2,6 +2,10 @@ package com.example.servergraphql.common;
 
 public class Constantes {
     public static final String SPACE = " ";
+    public static final String EMPTY = "";
+    public static final String SECURITY_JWT_KEYSTORE_NAME = "${application.security.jwt.keystoreName}";
+    public static final String APPLICATION_SECURITY_JWT_CLAVE = "${application.security.jwt.clave}";
+    public static final String SECURITY_JWT_SERVER_NAME = "${application.security.jwt.serverName}";
 
     private Constantes(){}
     public static final String CLAVEKEYSTORE = "clave";

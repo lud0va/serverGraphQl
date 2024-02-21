@@ -40,10 +40,16 @@ public class CustomerServices {
 
     public Customers updateCustomer(CustomerInput customerInput){
         try {
-            CustomersEntity cust = mapper.toCustomerEntity(customerInput);
-            CustomersEntity c = dao.save(cust);
+            if (!dao.findById(customerInput.id()).isPresent()){
+                CustomersEntity cust = mapper.toCustomerEntity(customerInput);
+                CustomersEntity c = dao.save(cust);
+                return mapper.toCustomer(c);
+            }else {
+                throw new IdInvalidaException();
+            }
 
-            return mapper.toCustomer(c);
+
+
         }catch (DataIntegrityViolationException s){
             throw new IdInvalidaException();
         }
@@ -51,7 +57,8 @@ public class CustomerServices {
     }
 
     public void deleteCustomer(int idCustomer) {
-        CustomersEntity entity=dao.findById(idCustomer).get();
+        //merle una excepcion
+        CustomersEntity entity=dao.findById(idCustomer).orElseThrow(IdInvalidaException::new);
         dao.delete(entity);
 
     }

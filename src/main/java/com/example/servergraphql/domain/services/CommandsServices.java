@@ -1,10 +1,11 @@
 package com.example.servergraphql.domain.services;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.data.dao.CommandsDao;
 import com.example.servergraphql.data.model.CommandsEntity;
 import com.example.servergraphql.domain.model.Command;
 import com.example.servergraphql.domain.model.mappers.CommandsMapper;
-import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
+import com.example.servergraphql.spring.errors.exceptions.NotFoundElementException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -35,7 +36,7 @@ public class CommandsServices {
 
         return commands;
         } catch (NoSuchElementException e) {
-            throw new NotFoundElementException("Command no encontrada");
+            throw new NotFoundElementException(Constantes.COMMAND_NO_ENCONTRADA);
         }
         }
 }

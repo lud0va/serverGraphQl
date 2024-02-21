@@ -1,6 +1,9 @@
 package com.example.servergraphql.common;
 
 public class Constantes {
+    public static final String SPACE = " ";
+
+    private Constantes(){}
     public static final String CLAVEKEYSTORE = "clave";
     public static final String KEYSTORE_NAME = "keystoreName";
     public static final String SERVER_NAME = "serverName";
@@ -37,4 +40,22 @@ public class Constantes {
     public static final String NUMBEROFSEATS = "number_of_seats";
     public static final String TABLES = "tables";
     public static final String SELECT_RT_FROM_RESTAURANT_TABLES_ENTITY_RT_JOIN_RT_ORDERS_O_WHERE_O_ORDER_ID_ID = "SELECT rt FROM RestaurantTablesEntity rt JOIN rt.customer o WHERE o.customer_id = :id";
+    public static final String CONFIG_CLAVE_KEYSTORE_XML = "config/claveKeystore.xml";
+    public static final String FROM_COMMANDS_ENTITY_WHERE_CUSTOMERS_ENTITY_ID_ID = "from CommandsEntity where customersEntity.id=:id";
+    public static final String SELECT_RT_FROM_RESTAURANT_TABLES_ENTITY_RT_JOIN_RT_CUSTOMER_C_WHERE_C_ID_ID = "SELECT rt FROM RestaurantTablesEntity rt JOIN rt.customer c where  c.id=:id";
+    public static final String SPRING = "spring";
+    public static final String COMMAND_NO_ENCONTRADA = "Command no encontrada";
+    public static final String CUSTOMER_NOT_FOUND = "Customer not found";
+    public static final String ORDER_ITEM_NOT_FOUND = "OrderItem not found";
+    public static final String ORDER_NO_ENCONTRADA = "Order no encontrada";
+    public static final String MESA_NO_ENCONTRADA = "Mesa no encontrada";
+    public static final String ID_INTRODUCIDA_NO_ES_VALIDA = "Id introducida no es valida";
+    public static final String TOKEN_CADUCADO = "Token caducado";
+    public static final String HAS_ROLE_ADMIN_OR_HAS_ROLE_USER = "hasRole('admin') OR hasRole('user')";
+    public static final String HAS_ROLE_ADMIN = "hasRole('admin')";
+    public static final String BEARER = "Bearer ";
+    public static final String PKCS_12 = "PKCS12";
+    public static final String ROLE = "role";
+    public static final String ERROR_AL_COGER_LA_CLAVE = "error al coger la clave";
+    public static final String ALGUNO_DE_LOS_ELEMENTOS_INTRODUCIDOS_NO_ES_VALIDO = "Alguno de los elementos introducidos no es valido";
 }

@@ -1,10 +1,11 @@
 package com.example.servergraphql.domain.services;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.data.dao.RestaurantTablesDao;
 import com.example.servergraphql.data.model.RestaurantTablesEntity;
 import com.example.servergraphql.domain.model.RestaurantTables;
 import com.example.servergraphql.domain.model.mappers.RestaurantTablesMapper;
-import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
+import com.example.servergraphql.spring.errors.exceptions.NotFoundElementException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class RestaurantTablesServices {
             }
             return tables;
         }catch (NoSuchElementException s){
-            throw new NotFoundElementException("Mesa no encontrada");
+            throw new NotFoundElementException(Constantes.MESA_NO_ENCONTRADA);
         }
 
     }

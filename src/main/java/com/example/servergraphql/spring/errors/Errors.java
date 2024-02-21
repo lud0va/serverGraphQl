@@ -1,4 +1,4 @@
-package com.example.servergraphql.spring.Errors;
+package com.example.servergraphql.spring.errors;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

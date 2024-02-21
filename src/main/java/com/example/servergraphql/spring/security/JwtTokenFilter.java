@@ -1,5 +1,6 @@
 package com.example.servergraphql.spring.security;
 
+import com.example.servergraphql.common.Constantes;
 import io.jsonwebtoken.ExpiredJwtException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -38,13 +39,13 @@ public class JwtTokenFilter extends OncePerRequestFilter {
         try {
             // Get authorization header and validate
             final String header = request.getHeader(HttpHeaders.AUTHORIZATION);
-            if (isEmpty(header) || !header.startsWith("Bearer ")) {
+            if (isEmpty(header) || !header.startsWith(Constantes.BEARER)) {
                 chain.doFilter(request, response);
                 return;
             }
 
             // Get jwt token and validate
-            final String token = header.split(" ")[1].trim();
+            final String token = header.split(Constantes.SPACE)[1].trim();
 
             if (!jwtTokenUtil.validate(token)) {
                 chain.doFilter(request, response);
@@ -52,7 +53,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             }
 
             // Get user identity and set it on the spring security context
-            UserDetails userDetails = userRepo.createUser(jwtTokenUtil.getUsername(token), "", jwtTokenUtil.getRole(token));
+            UserDetails userDetails =
+                    userRepo.createUser(jwtTokenUtil.getUsername(token), "", jwtTokenUtil.getRole(token));
 
 
             UsernamePasswordAuthenticationToken

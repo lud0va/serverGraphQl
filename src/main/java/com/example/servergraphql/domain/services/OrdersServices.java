@@ -1,19 +1,19 @@
 package com.example.servergraphql.domain.services;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.data.dao.OrdersDao;
 import com.example.servergraphql.data.model.CustomersEntity;
 import com.example.servergraphql.domain.model.graphql.OrderInput;
 import com.example.servergraphql.data.model.OrdersEntity;
 import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.model.mappers.OrdersMapper;
-import com.example.servergraphql.spring.Errors.exceptions.IdInvalidaException;
-import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
+import com.example.servergraphql.spring.errors.exceptions.IdInvalidaException;
+import com.example.servergraphql.spring.errors.exceptions.NotFoundElementException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @Service
 public class OrdersServices {
@@ -36,40 +36,39 @@ public class OrdersServices {
     }
 
     public List<Orders> getOrdersDeCust(int idcust) {
-        try {
-            List<OrdersEntity> o = dao.findAllByCustomersEntity(new CustomersEntity(idcust)).get();
-            List<Orders> ord = new ArrayList<>();
-            for (OrdersEntity c : o) {
-                ord.add(mapper.toOrders(c));
 
-            }
-            return ord;
-        } catch (NoSuchElementException e) {
-            throw new NotFoundElementException("Order no encontrada");
-        }
-      }
+        List<OrdersEntity> o = dao.findAllByCustomersEntity(new CustomersEntity(idcust))
+                .orElseThrow(() -> new NotFoundElementException(Constantes.ORDER_NO_ENCONTRADA));
+        List<Orders> ord = new ArrayList<>();
+        for (OrdersEntity c : o) {
+            ord.add(mapper.toOrders(c));
 
-      public Orders saveOrder(OrderInput input){
-          try {
-          OrdersEntity order = mapper.toOrderItems(input);
-          order.setCustomersEntity(new CustomersEntity(input.customerid()));
-          OrdersEntity o = dao.save(order);
-          return mapper.toOrders(o);
-          }catch (DataIntegrityViolationException s){
-              throw new IdInvalidaException();
-          }
-      }
-    public Orders getOrder(int id) {
-        try {
-            return mapper.toOrders(dao.findByOrderId(id).get());
-        } catch (NoSuchElementException e) {
-            throw new NotFoundElementException("Order no encontrada");
         }
+        return ord;
 
     }
 
-    public void deleteOrder(int idOrder) {
-        dao.deleteById(Long.valueOf(idOrder));
+    public Orders saveOrder(OrderInput input) {
+        try {
+            OrdersEntity order = mapper.toOrderItems(input);
+            order.setCustomersEntity(new CustomersEntity(input.customerid()));
+            OrdersEntity o = dao.save(order);
+            return mapper.toOrders(o);
+        } catch (DataIntegrityViolationException s) {
+            throw new IdInvalidaException();
+        }
+    }
 
+    public Orders getOrder(int id) {
+
+        return mapper.toOrders(dao.findByOrderId(id).orElseThrow(() -> new NotFoundElementException(Constantes.ORDER_NO_ENCONTRADA)));
+
+
+    }
+
+    public Boolean deleteOrder(int idOrder) {
+        OrdersEntity o = dao.findByOrderId(idOrder).orElseThrow(() -> new NotFoundElementException(Constantes.ORDER_NO_ENCONTRADA));
+        dao.delete(o);
+        return true;
     }
 }

@@ -1,10 +1,9 @@
 package com.example.servergraphql.spring.graphql;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.domain.model.graphql.OrderInput;
-import com.example.servergraphql.spring.Errors.Errors;
 import com.example.servergraphql.domain.model.Orders;
 import com.example.servergraphql.domain.services.OrdersServices;
-import io.vavr.control.Either;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
@@ -22,32 +21,32 @@ public class OrdersController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasRole('admin') OR hasRole('user')")
+    @PreAuthorize(Constantes.HAS_ROLE_ADMIN_OR_HAS_ROLE_USER)
     public List<Orders> getAllOrders() {
         return serv.getAllOrders();
     }
 
     @QueryMapping
-    @PreAuthorize("hasRole('admin') OR hasRole('user')")
+    @PreAuthorize(Constantes.HAS_ROLE_ADMIN_OR_HAS_ROLE_USER)
     public List<Orders> getOrdersDeCust(@Argument int idCust) {
         return serv.getOrdersDeCust(idCust);
     }
 
     @QueryMapping
-    @PreAuthorize("hasRole('admin') OR hasRole('user')")
+    @PreAuthorize(Constantes.HAS_ROLE_ADMIN_OR_HAS_ROLE_USER)
     public Orders getOrder(@Argument int id) {
         return serv.getOrder(id);
     }
 
     @MutationMapping
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize(Constantes.HAS_ROLE_ADMIN)
     public Boolean deleteOrder(@Argument int idOrder) {
-        serv.deleteOrder(idOrder);
-        return null;
+
+        return   serv.deleteOrder(idOrder);
     }
 
     @MutationMapping
-    @PreAuthorize("hasRole('admin')")
+    @PreAuthorize(Constantes.HAS_ROLE_ADMIN)
     public Orders saveOrder(@Argument OrderInput input) {
         return serv.saveOrder(input);
     }

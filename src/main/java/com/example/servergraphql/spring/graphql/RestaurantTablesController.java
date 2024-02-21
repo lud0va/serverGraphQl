@@ -1,5 +1,6 @@
 package com.example.servergraphql.spring.graphql;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.domain.model.RestaurantTables;
 import com.example.servergraphql.domain.services.RestaurantTablesServices;
 import org.springframework.graphql.data.method.annotation.Argument;
@@ -18,7 +19,7 @@ public class RestaurantTablesController {
     }
 
     @QueryMapping
-    @PreAuthorize("hasRole('admin') OR hasRole('user')")
+    @PreAuthorize(Constantes.HAS_ROLE_ADMIN_OR_HAS_ROLE_USER)
     public List<RestaurantTables> getAllTablesByCustomer(@Argument int idCust){
         return restaurantTablesServices.getAllTablesByCustomer(idCust);
     }

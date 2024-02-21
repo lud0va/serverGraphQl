@@ -20,7 +20,7 @@ public class Configuration {
     public Configuration() {
         try {
             Properties p = new Properties();
-            p.loadFromXML(Configuration.class.getClassLoader().getResourceAsStream("config/claveKeystore.xml"));
+            p.loadFromXML(Configuration.class.getClassLoader().getResourceAsStream(Constantes.CONFIG_CLAVE_KEYSTORE_XML));
             this.clave = p.getProperty(Constantes.CLAVEKEYSTORE);
             this.nombreKeystore=p.getProperty(Constantes.KEYSTORE_NAME);
             this.serverName=p.getProperty(Constantes.SERVER_NAME);

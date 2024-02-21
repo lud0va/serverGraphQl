@@ -225,6 +225,8 @@ commandName
 
 
 ###Excepciones
+
+
 ###Logearse a un usuario que no existe
 GET http://localhost:8080/login?username=holanoexisto&password=holanoexisto
 
@@ -250,9 +252,39 @@ mutation addOrderItem {
         quantity
     }
 }
+###Element not found exception
+
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrderItemsByOrder($id: Int) {
+    getOrderItemsByOrder(id: $id) {
+        name
+        quantity
+        price
+    }
+}
+
+{
+  "id":22222
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getCustomer($id: Int) {
+    getCustomer(id: $id) {
+        firstName
+    }
+}
+
+{
+  "id": 2000
+}
 
 
-###Introducir una id  invalida
+###
 GRAPHQL http://localhost:8081/graphql
 Authorization: Bearer {{token}}
 
@@ -264,4 +296,358 @@ query  getOrderItemsByItem($idItem: Int) {
 
 {
   "idItem": 211111
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+
+mutation  deleteCustomer{
+    deleteCustomer(idCustomer:7)
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrdersDeCust($idCust: Int) {
+    getOrdersDeCust(idCust: $idCust) {
+        orderId
+    }
+}
+
+{
+  "idCust": 2000
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrder($id: Int) {
+    getOrder(id: $id) {
+        orderId
+        orderDate
+
+    }
+}
+
+{
+  "id": 200
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query getAllTablesByCust($idCust:Int){
+    getAllTablesByCustomer(idCust: $idCust)
+    {
+        numberOfSeats
+    }
+}
+{"idCust": 1222
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getCommandsByCustomer($idCust: Int) {
+    getCommandsByCustomer(idCust: $idCust) {
+        commandName
+    }
+}
+
+{
+  "idCust": 111
+}
+
+###Id Invalida exception
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation  updateCustomer {
+    updateCustomer(
+        input: {
+            id: 2000,
+            firstName: "l",
+            lastName: "l",
+            email: "l",
+            phone: "l",
+            dateOfBirth:"2001-09-09",
+        }
+    ) {
+        firstName
+    }
+}
+
+
+
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation  addCustomer {
+    addCustomer(input: {
+        firstName: "luisPrueba2",
+        lastName: "luisPrueba2",
+        email: "luisPrueba@example.com2",
+        dateOfBirth: "",
+        phone: "siPrueba"
+    }) {
+        id
+        firstName
+        lastName
+        email
+        dateOfBirth
+        phone
+    }
+}
+
+
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation saveOrder {
+    saveOrder(input:
+    {
+        customerid: 2,
+        orderDate: "2023-09-10T22:30:00"
+
+    }) {
+        orderId
+    }
+}
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation  deleteOrder($idOrder: Int) {
+    deleteOrder(idOrder: $idOrder)
+}
+
+{
+  "idOrder": 14
+}
+
+###Todas las llamadas usando un usuario(Creo que hacerlas con admin seria innecesario pues el admin puede hacer todas las llamadas y las pruebas anteriores las estaba haciendo con un admin)
+GET http://localhost:8080/login?username=hola&password=hola
+
+> {%
+    client.global.set("token", response.body.access_token)
+%}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation addOrderItem {
+    addOrderItem(input:
+    {
+        name: "arrozyhuevo",
+        price: 1.5,
+        quantity: 10,
+        orderId: 14}) {
+        name
+        orderItemId
+        price
+        quantity
+    }
+}
+
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrderItemsByItem($idItem: Int) {
+    getOrderItemsByItem(idItem: $idItem) {
+        name
+    }
+}
+
+{
+  "idItem": 1
+}
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrderItemsByOrder($id: Int) {
+    getOrderItemsByOrder(id: $id) {
+        name
+        quantity
+        price
+    }
+}
+
+{
+  "id": 1
+}
+###Customers
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation  updateCustomer {
+    updateCustomer(
+        input: {
+            id: 2,
+            firstName: "l",
+            lastName: "l",
+            email: "l",
+            phone: "l",
+            dateOfBirth:"2001-09-09",
+        }
+    ) {
+        firstName
+    }
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getCustomers {
+    getCustomers {
+        firstName
+    }
+}
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getCustomer($id: Int) {
+    getCustomer(id: $id) {
+        firstName
+    }
+}
+
+{
+  "id": 1
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+
+mutation  deleteCustomer{
+    deleteCustomer(idCustomer:7)
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation  addCustomer {
+    addCustomer(input: {
+        firstName: "luisPrueba2",
+        lastName: "luisPrueba2",
+        email: "luisPrueba@example.com2",
+        dateOfBirth: "2001-09-09",
+        phone: "siPrueba"
+    }) {
+        id
+        firstName
+        lastName
+        email
+        dateOfBirth
+        phone
+    }
+}
+###Orders
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  {
+    getAllOrders {
+        orderId
+    }
+}
+
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrdersDeCust($idCust: Int) {
+    getOrdersDeCust(idCust: $idCust) {
+        orderId
+    }
+}
+
+{
+  "idCust": 1
+}
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation saveOrder {
+    saveOrder(input:
+    {
+        customerid: 2,
+        orderDate: "2023-09-10T22:30:00"
+
+    }) {
+        orderId
+    }
+}
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+mutation  deleteOrder($idOrder: Int) {
+    deleteOrder(idOrder: $idOrder)
+}
+
+{
+  "idOrder": 14
+}
+###
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getOrder($id: Int) {
+    getOrder(id: $id) {
+        orderId
+        orderDate
+
+    }
+}
+
+{
+  "id": 2
+}
+
+###RestaurantTables
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query getAllTablesByCust($idCust:Int){
+    getAllTablesByCustomer(idCust: $idCust)
+    {
+        numberOfSeats
+    }
+}
+{"idCust": 1
+}
+
+###Commands
+GRAPHQL http://localhost:8081/graphql
+Authorization: Bearer {{token}}
+
+query  getCommandsByCustomer($idCust: Int) {
+    getCommandsByCustomer(idCust: $idCust) {
+        commandName
+    }
+}
+
+{
+  "idCust": 1
 }

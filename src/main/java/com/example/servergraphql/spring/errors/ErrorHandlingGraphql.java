@@ -1,8 +1,8 @@
-package com.example.servergraphql.spring.Errors;
+package com.example.servergraphql.spring.errors;
 
-import com.example.servergraphql.spring.Errors.exceptions.IdInvalidaException;
-import com.example.servergraphql.spring.Errors.exceptions.MyTokenExpired;
-import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
+import com.example.servergraphql.spring.errors.exceptions.IdInvalidaException;
+import com.example.servergraphql.spring.errors.exceptions.MyTokenExpired;
+import com.example.servergraphql.spring.errors.exceptions.NotFoundElementException;
 import graphql.GraphQLError;
 import graphql.GraphqlErrorBuilder;
 import graphql.schema.DataFetchingEnvironment;

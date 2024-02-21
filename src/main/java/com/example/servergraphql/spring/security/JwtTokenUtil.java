@@ -1,6 +1,7 @@
 package com.example.servergraphql.spring.security;
 
 import com.example.servergraphql.common.Configuration;
+import com.example.servergraphql.common.Constantes;
 import io.jsonwebtoken.*;
 import org.springframework.stereotype.Component;
 
@@ -25,9 +26,9 @@ public class JwtTokenUtil {
     }
 
     public boolean validate(String token) throws ExpiredJwtException {
-        try{
-            KeyStore keyStore = KeyStore.getInstance("PKCS12");
-            keyStore.load(new FileInputStream(co.getNombreKeystore()), co.getClave().toCharArray());
+        try(FileInputStream fis = new FileInputStream(co.getNombreKeystore())) {
+            KeyStore keyStore = KeyStore.getInstance(Constantes.PKCS_12);
+            keyStore.load(fis, co.getClave().toCharArray());
             X509Certificate cert = (X509Certificate) keyStore.getCertificate(co.getServerName());
             PublicKey publicKey = cert.getPublicKey();
             Jwts.parserBuilder()
@@ -50,7 +51,7 @@ public class JwtTokenUtil {
                 .build()
                 .parseClaimsJws(token);
 
-        return claimsJws.getBody().get("role",String.class);
+        return claimsJws.getBody().get(Constantes.ROLE,String.class);
     }
     public String getUsername(String token) {
 
@@ -63,14 +64,14 @@ public class JwtTokenUtil {
 
     }
    private PublicKey getKey(){
-       try {
-           KeyStore keyStore = KeyStore.getInstance("PKCS12");
-           keyStore.load(new FileInputStream(co.getNombreKeystore()), co.getClave().toCharArray());
+       try (FileInputStream fis = new FileInputStream(co.getNombreKeystore())){
+           KeyStore keyStore = KeyStore.getInstance(Constantes.PKCS_12);
+           keyStore.load(fis, co.getClave().toCharArray());
            X509Certificate cert = (X509Certificate) keyStore.getCertificate(co.getServerName());
 
            return cert.getPublicKey();
        }  catch (CertificateException | KeyStoreException | IOException | NoSuchAlgorithmException | JwtException e) {
-           Logger.getLogger(JwtTokenUtil.class.getName()).log(Level.SEVERE, "error al coger la clave", e);
+           Logger.getLogger(JwtTokenUtil.class.getName()).log(Level.SEVERE, Constantes.ERROR_AL_COGER_LA_CLAVE, e);
            return null;
        }
    }

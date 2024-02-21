@@ -1,5 +1,6 @@
 package com.example.servergraphql.data.dao;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.data.model.CommandsEntity;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.ListCrudRepository;
@@ -10,6 +11,7 @@ import java.util.Optional;
 
 @Repository
 public interface CommandsDao extends ListCrudRepository<CommandsEntity,Long> {
-   @Query("from CommandsEntity where customersEntity.id=:id")
+
+    @Query(Constantes.FROM_COMMANDS_ENTITY_WHERE_CUSTOMERS_ENTITY_ID_ID)
     Optional<List<CommandsEntity>> findAllByCustomer(int id);
 }

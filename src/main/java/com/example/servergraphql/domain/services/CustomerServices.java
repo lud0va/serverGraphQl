@@ -1,12 +1,13 @@
 package com.example.servergraphql.domain.services;
 
+import com.example.servergraphql.common.Constantes;
 import com.example.servergraphql.data.dao.CustomersDao;
 import com.example.servergraphql.data.model.CustomersEntity;
 import com.example.servergraphql.domain.model.Customers;
 import com.example.servergraphql.domain.model.graphql.CustomerInput;
 import com.example.servergraphql.domain.model.mappers.CustomerMapper;
-import com.example.servergraphql.spring.Errors.exceptions.IdInvalidaException;
-import com.example.servergraphql.spring.Errors.exceptions.NotFoundElementException;
+import com.example.servergraphql.spring.errors.exceptions.IdInvalidaException;
+import com.example.servergraphql.spring.errors.exceptions.NotFoundElementException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
@@ -56,11 +57,11 @@ public class CustomerServices {
 
     }
 
-    public void deleteCustomer(int idCustomer) {
-        //merle una excepcion
-        CustomersEntity entity=dao.findById(idCustomer).orElseThrow(IdInvalidaException::new);
+    public Boolean deleteCustomer(int idCustomer) {
+        CustomersEntity entity=dao.findById(idCustomer)
+                .orElseThrow(()->new NotFoundElementException(Constantes.CUSTOMER_NOT_FOUND));
         dao.delete(entity);
-
+        return true;
     }
 
     public Customers getById(int id) {
@@ -74,7 +75,7 @@ public class CustomerServices {
             return mapper.toCustomer(c);
 
         }catch (NoSuchElementException s){
-            throw new NotFoundElementException("Customer not found");
+            throw new NotFoundElementException(Constantes.CUSTOMER_NOT_FOUND);
         }
 
 
